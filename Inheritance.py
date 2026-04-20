@@ -75,6 +75,8 @@ class Employee(Person):
 tom = Employee("Tom", "Microsoft")
 tom.display_info()
 """
+
+"""
 # Проверка типа объекта
 class Person:
     # атрибуты класса - общие для всех объектов
@@ -136,3 +138,48 @@ act(bob)    # Bob studies
 act(sam)    # Sam does nothing
 act(mia)
 act(elis)
+"""
+
+"""
+# Статические методы
+# Кроме обычных методов класс может определять статические методы.
+# Такие методы предваряются аннотацией @staticmethod и относятся в целом к классу.
+# Статические методы обычно определяют поведение, которое не зависит от конкретного
+# объекта
+
+class Person:
+    __type = "Person"
+ 
+    @staticmethod
+    def print_type():
+        print(Person.__type)
+ 
+ 
+Person.print_type()     # Person - обращение к статическому методу через имя класса
+ 
+tom = Person()
+tom.print_type()     # Person - обращение к статическому методу через имя объекта
+"""
+
+# Строковое представление объекта. Класс object
+# все классы неявно имеют один общий суперкласс - 
+# object и все классы по умолчанию наследуют его методы
+# Одним из наиболее используемых методов класса object является 
+# метод __str__(). Когда необходимо получить строковое представление
+#  объекта или вывести объект в виде строки, то Python как раз вызывает
+#  этот метод. И при определении класса хорошей практикой считается 
+# переопределение этого метода
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    def display_info(self):
+        print(f"Name: {self.name}  Age: {self.age}")
+    def __str__(self):
+        return f"Person name: {self.name} Person age: {self.age}"
+tom = Person("Tom", 23)
+print(tom)
+tom.display_info()
+print(tom) # здесь срабатывает перегрузка метода __str__()
+
