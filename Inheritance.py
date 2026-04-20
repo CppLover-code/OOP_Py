@@ -46,4 +46,93 @@ tom.work()      # Employee works
 tom.study()     # Student studies
 """
 
+"""
 # Переопределение функционала базового класса
+class Person:
+ 
+    def __init__(self, name: str):
+        self.__name = name   # имя человека
+ 
+    @property
+    def name(self):
+        return self.__name
+ 
+    def display_info(self):
+        print(f"Name: {self.__name}")
+    
+class Employee(Person):
+    def __init__(self, name, company):
+        super().__init__(name)
+        self.company = company
+
+    def display_info(self):
+        super().display_info()
+        print(f"Company: {self.company}")
+
+    def work(self):
+        print(f"{self.name} works")
+
+tom = Employee("Tom", "Microsoft")
+tom.display_info()
+"""
+# Проверка типа объекта
+class Person:
+    # атрибуты класса - общие для всех объектов
+    type = "Person"
+    description = "Describes a person"
+    default_name = "Undefined"
+    
+    # Если имя человека НЕ будет указано,
+    # то при выводе инфо будет указано имя по умолчанию из атрибута класса
+    def __init__(self, name):
+        if name:
+            self.name = name
+        else:
+            self.name = Person.default_name
+
+    @property
+    def name(self):
+        return self.__name
+    
+    @name.setter
+    def name(self, name):
+        self.__name = name
+ 
+    def do_nothing(self):
+        print(f"{self.name} does nothing")
+ 
+ 
+#  класс работника
+class Employee(Person):
+ 
+    def work(self):
+        print(f"{self.name} works")
+ 
+ 
+#  класс студента
+class Student(Person):
+ 
+    def study(self):
+        print(f"{self.name} studies")
+ 
+ 
+def act(person):
+    if isinstance(person, Student):
+        person.study()
+    elif isinstance(person, Employee):
+        person.work()
+    elif isinstance(person, Person):
+        person.do_nothing()
+ 
+elis = Person("")
+print(elis.name)
+tom = Employee("Tom")
+bob = Student("Bob")
+sam = Person("Sam")
+mia = Student("Mia")
+ 
+act(tom)    # Tom works
+act(bob)    # Bob studies
+act(sam)    # Sam does nothing
+act(mia)
+act(elis)
