@@ -199,3 +199,44 @@ for person in view:
 Из результата функции мы получим преобразованные элементы списка
 """
 
+numbers = [ 1, 2, 3, 4, 5]
+# result = map(lambda n: n * n, numbers)
+ 
+def square(number): return number * number
+ 
+result = map(square, numbers)
+ 
+for n in result: print(n, end=" ")      # 1 4 9 16 25
+
+# Копирование списков
+"""
+ВАЖНО!!!!!!
+При копировании списков следует учитывать, 
+что списки представляют изменяемый (mutable) тип, 
+поэтому если обе переменных будут указывать на один 
+и тот же список, то изменение одной переменной, 
+затронет и другую переменную
+"""
+people1 = ["Tom", "Bob", "Alice"]
+people2 = people1
+people2.append("Sam")   # добавляем элемент во второй список
+# people1 и people2 указывают на один и тот же список
+print(people1)   # ["Tom", "Bob", "Alice", "Sam"]
+print(people2)   # ["Tom", "Bob", "Alice", "Sam"]
+
+# Соединение списков
+people1 = ["Tom", "Bob", "Alice"]
+people2 = ["Tom", "Sam", "Tim", "Bill"]
+people3 = people1 + people2
+print(people3)   # ["Tom", "Bob", "Alice", "Tom", "Sam", "Tim", "Bill"]
+
+# Списки списков - ВЛОЖЕНЫЕ СПИСКИ
+people = [
+    ["Tom", 29],
+    ["Alice", 33],
+    ["Bob", 27]
+]
+ 
+print(people[0])         # ["Tom", 29]
+print(people[0][0])      # Tom
+print(people[0][1])      # 29
