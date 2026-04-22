@@ -193,3 +193,148 @@ person =("Tom", 38, "Google")
 # выполняем распаковку кортежа person
 print_person(*person)   # Name:Tom, Age: 38, Company: Google
 
+# Оператор ** и распаковка
+# Оператор ** применяется для распаковки словарей:
+def print_person(name, age, company):
+  print(f"Name:{name}, Age: {age}, Company: {company}")
+  
+tom ={"name":"Tom", "age":38, "company":"Google"}
+# выполняем распаковку словаря tom
+print_person(**tom) # Name:Tom, Age: 38, Company: Google
+
+bob ={"name":"Bob", "age":44, "company":"Luxsoft"}
+# выполняем распаковку словаря tom
+print_person(**bob) 
+
+# Сочетание параметров
+# Параметры *args и *kwargs могут использоваться в функции вместе с другими параметрами. Например
+def sum(num1, num2, *nums):
+    result=num1+num2
+    for n in nums:
+        result += n
+    return result
+ 
+print(sum(1,2,3))       # 6
+print(sum(1,2,3,4))     # 10
+
+# ВСТРОЕННАЯ ФУНКЦИЯ zip() 
+"""
+Встроенная функция zip() в Python позволяет объединить элементы из нескольких
+коллекций (таких как списки, словари, кортежи или строки) в один набор кортежей. 
+Объединяемые коллекции передаются в качестве параметра через запятую
+	
+zip(*iterables)
+
+В качестве результата функция возвращает итератор на набор кортежей, где каждый 
+кортеж содержит элементы из соответствующей позиции коллекций-параметров. 
+Например, 1-й кортеж содержит 1-е элементы из каждой коллекции, 2-й кортеж 
+содержит 2-е элементы из каждой коллекции и так далее. Причем итератор 
+останавливается, когда завершается самая короткая коллекция-параметр. 
+То есть по сути на выходе мы получим набор, где количество кортежей равно 
+количеству элементов в наименьшей объединяемой коллекции.
+"""
+names = ["Tom", "Bob", "Sam"]
+ages = [41, 46, 35]
+ 
+for user in zip(names, ages):
+    print(user)
+ 
+# Консольный вывод
+# ("Tom", 41)
+# ("Bob", 46)
+# ("Sam", 35)
+
+# мы можем сразу разложить полученный кортеж на отдельные переменные:
+names = ["Tom", "Bob", "Sam"]
+ages = [41, 46, 35]
+ 
+for name, age in zip(names, ages):
+    print(f"Name: {name}  Age: {age}")
+ 
+# Консольный вывод
+# Name: Tom  Age: 41
+# Name: Bob  Age: 46
+# Name: Sam  Age: 35
+
+# Также мы могли бы получить результат функции в отдельную переменную и затем ее перебрать:
+names = ["Tom", "Bob", "Sam"]
+ages = [41, 46, 35]
+ 
+users = zip(names, ages)
+print(users)        # <zip object at 0x7c2307627c40>
+ 
+for user in users:
+    print(user)
+
+# Объединение списков
+names = ["Tom", "Bob", "Sam"]
+ages = [41, 46, 35]   
+ 
+users = list(zip(names, ages)) 
+print(users)        # [("Tom", 41), ("Bob", 46), ("Sam", 35)]
+ 
+for user in users:
+    print(user)
+ 
+# Консольный вывод
+# ("Tom", 41)
+# ("Bob", 46)
+# ("Sam", 35)
+
+# ///////////////////////////////////////////////
+names = ["Tom", "Bob", "Sam"]
+ages = [41, 46, 35]   
+companies = ["Sber", "VK", "Yandex"]
+ 
+users = list(zip(names, ages, companies)) 
+print(users)        # [("Tom", 41, "Sber"), ("Bob", 46, "VK"), ("Sam", 35, "Yandex")]
+ 
+for user in users:
+    print(user)
+ 
+# Консольный вывод
+# ("Tom", 41, "Sber")
+# ("Bob", 46, "VK")
+# ("Sam", 35, "Yandex")
+
+# Разложение списка кортежей
+sers = [("Tom", 41), ("Bob", 46), ("Sam", 35)]
+ 
+names, ages = zip(*users)
+ 
+print(names)    # ("Tom", "Bob", "Sam")
+print(ages)     # (41, 46, 35)
+
+# Одновременный перебор нескольких списков
+names = ["Tom", "Bob", "Sam"]
+ages = [41, 46, 35]
+ 
+for name, age in zip(names, ages):
+    print(f"Name: {name}  Age: {age}")
+ 
+# Консольный вывод
+# Name: Tom  Age: 41
+# Name: Bob  Age: 46
+# Name: Sam  Age: 35
+
+# Создание словарей
+keys = ["name", "age", "city"]
+values = ["Tom", 41, "Volgograd"]
+ 
+user = dict(zip(keys, values))
+print(user)  # {"name": "Tom", "age": 41, "city": "Volgograd"}
+
+# Работа с диапазонами
+# Объединение диапазонов или последовательностей:
+numbers = range(1, 4)
+letters = ["a", "b", "c"]
+ 
+result = list(zip(numbers, letters))
+print(result)  # [(1, "a"), (2, "b"), (3, "c")]
+
+# Сравнение элементов в списках
+list1 = [1, 2, 3]
+list2 = [1, 4, 3]
+ 
+comparison = [a == b for a, b in zip(list1, list2)]
+print(comparison)   # [True, False, True]
