@@ -38,3 +38,4 @@ print(new_numbers)      # [-3, -2, -1, 0, 2, 4, 6]
 dictionary = {"red": "красный", "blue": "синий", "green": "зеленый"}
 words = [f"{key}: {dictionary[key]}" for key in dictionary]
 print(words)    # ['red: красный', 'blue: синий', 'green: зеленый']
+
